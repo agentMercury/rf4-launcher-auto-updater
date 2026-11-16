@@ -1,0 +1,11 @@
+# 统一行尾，避免 Windows / macOS / Linux 互拉时 bat 跑不起来、md 满屏 diff
+* text=auto
+
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf
+*.py   text eol=lf
+*.md   text eol=lf
+
+*.ico  binary
+*.exe  binary

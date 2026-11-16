@@ -466,6 +466,23 @@ def install(new_path, dry=False):
 
 
 # ---------------------------- 命令 ----------------------------
+def backup_usage():
+    """返回 (备份文件数, 总字节数)。只统计 backups/ 下的文件，忽略目录不存在的情况。"""
+    if not os.path.isdir(BACKUP_DIR):
+        return 0, 0
+    cnt = 0
+    total = 0
+    for name in os.listdir(BACKUP_DIR):
+        path = os.path.join(BACKUP_DIR, name)
+        try:
+            if os.path.isfile(path):
+                cnt += 1
+                total += os.path.getsize(path)
+        except OSError:
+            continue
+    return cnt, total
+
+
 def cmd_status():
     v = exe_required_version(LAUNCHER_EXE)
     st = load_state()
@@ -485,6 +502,12 @@ def cmd_status():
     print("上次网盘文件: %s" % st.get("last_file_id"))
     if st.get("installed"):
         print("上次自动更新: %s" % json.dumps(st["installed"], ensure_ascii=False))
+    cnt, total = backup_usage()
+    if cnt:
+        print("备份占用    : %d 个文件，%.1f MB（%s）" % (cnt, total / 1048576.0, BACKUP_DIR))
+        print("              不再需要旧版时可删除，保留最近一个即可回滚")
+    else:
+        print("备份占用    : 无备份（尚未替换过登录器）")
 
 
 def cmd_check(quiet=False):

@@ -146,6 +146,26 @@ https://wwbxt.lanzoul.com/b0nyv844f          登录插件下载（文件夹页�
 - Python 3（3.6+ 均可；只要标准库，GUI 需要 tkinter，官方安装包默认自带）
 - 游戏目录里有 `rf4_x64.exe` 和 `RF4钓鱼登录器.exe`
 
+### 先下载发布包（不想手工挑文件的看这里）
+
+不想一个个文件拷的话，直接去 Releases 页下载打包好的 zip：
+
+- **最新版**：<https://github.com/agentMercury/rf4-launcher-auto-updater/releases/latest>
+- **全部版本**：<https://github.com/agentMercury/rf4-launcher-auto-updater/releases>
+
+资产名形如 `rf4-launcher-auto-updater-v1.0.2.zip`，解压后得到一个完整的 `rf4-auto-update` 文件夹，
+按下面第 1 步放进游戏目录即可。每个 release 说明里都写了该资产的 SHA-256，下载后可以自己核一遍：
+
+```
+certutil -hashfile rf4-launcher-auto-updater-v1.0.2.zip SHA256
+```
+
+也可以直接克隆仓库（用 git 的话以后更新方便）：
+
+```
+git clone https://github.com/agentMercury/rf4-launcher-auto-updater.git
+```
+
 ### 三步装好
 
 **1. 放进去** —— 把整个 `rf4-auto-update` 文件夹放进游戏目录，和游戏本体同级：

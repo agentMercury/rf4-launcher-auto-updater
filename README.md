@@ -225,6 +225,8 @@ rem 等价于: pythonw rf4_updater.py watch
 匹配状态    : OK 可正常启动
 上次网盘文件: iLN4z4g5ohyb
 上次自动更新: {"at": "2026-11-16T12:33:33", "to_v": 154, "result": "same", "sha256": "b9a50eb3..."}
+备份占用    : 1 个文件，52.7 MB（E:\ChineseFishing4\rf4-auto-update\backups）
+              不再需要旧版时可删除，保留最近一个即可回滚
 ```
 
 > 本地 v154 高于补丁要求的 v153 是正常现象：登录器向下兼容，只要不低于它内嵌的 required 版本就不会弹版本不匹配。

@@ -23,6 +23,10 @@
 
 ---
 
+![自动更新器界面](docs/screenshot.png)
+
+> 界面为夜钓主题手绘风（纯 tkinter Canvas，无图片资源）：上方显示游戏目录 / 本地登录器 / 网盘版本 / 状态，中间 10 段进度带，下方是运行日志。
+
 ## 这个项目解决什么问题
 
 `RF4钓鱼登录器.exe`（约 52.7 MB）本身**没有**自动更新。作者发新版本时，它启动只会弹窗告诉你：
@@ -241,6 +245,9 @@ rem 等价于: pythonw rf4_updater.py watch
 | `updater_error.log` | 仅在 GUI 出异常时生成，含完整 traceback |
 | `backups/` | 每次替换前的登录器备份（`.bak.exe`），可手动回滚 |
 | `downloads/` | 下载缓存（`update --no-replace` 也会留在这里） |
+| `docs/screenshot.png` | 界面截图（README 用） |
+| `LICENSE` | MIT 许可证 |
+| `.gitignore` | 排除下载缓存、备份、日志、状态文件，仓库里只有源码 |
 
 所有 bat 都是纯 ASCII 且自动探测 Python 位置（先 PATH，再兜底 `%LOCALAPPDATA%\Python\pythoncore-*\pythonw.exe`），
 避免中文 Windows 控制台乱码，也避免误用 Microsoft Store 的 python 别名占位符。

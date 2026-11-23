@@ -27,6 +27,24 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import socket
+
+# Python 3 在 Windows 上默认按系统顺序尝试 getaddrinfo 返回的地址。
+# 蓝奏云的下载 CDN（*.webgetstore.com 等）同时返回 AAAA(IPv6) 和 A(IPv4) 记录，
+# 但本机 IPv6 出口不通：urllib 会先卡在 IPv6 SYN 上约 120 秒才回退 IPv4，
+# 表现就是"下载卡住"。这里把所有 IPv4-first 化：有 A 记录就只用 A 记录。
+_getaddrinfo_orig = socket.getaddrinfo
+
+
+def _getaddrinfo_ipv4_first(host, port, family=0, type=0, proto=0, flags=0):
+    infos = _getaddrinfo_orig(host, port, family, type, proto, flags)
+    if family in (0, socket.AF_UNSPEC):
+        v4 = [i for i in infos if i[0] == socket.AF_INET]
+        if v4:
+            return v4
+    return infos
+
+socket.getaddrinfo = _getaddrinfo_ipv4_first
 
 if sys.stdout is None:      # pythonw.exe 计划任务模式下无控制台
     sys.stdout = open(os.devnull, "w")
